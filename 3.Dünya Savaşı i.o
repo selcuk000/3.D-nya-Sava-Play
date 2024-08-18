@@ -1,0 +1,126 @@
+tkinter'den  içe  aktar  *
+ rastgele içe aktar
+ithalat  zamanı
+PIL'den  ImageTk'yi içe aktar  
+
+
+sınıf  Ufo :
+    def  __init__ ( self , Inek , UfoResim , canvas ):
+        kendi . tuval  =  tuval
+        kendi . Ineks  =  Inek
+        kendi . UfoResim  =  UfoResim
+        kendi . skor  =  0
+        kendi .hiz =  0​ 
+
+        
+        kendi . idUFO  =  tuval . create_image ( 50 , 100 , resim = UfoResim )  
+
+        
+        self . textSkor  =  self . canvas . create_text ( 610 , 30 , text = "Skor : 0" , font = ( "Arial" , 16 ), fill = "kırmızı" )
+        self.textHiz = self.canvas.create_text (  510 , 30 , text = "Hız : 0 " , font = ( " Arial " , 16 ) , fill = " blue " ) 
+
+        kendi . x  =  0 
+        kendi .y = 0​    
+
+        
+        kendi . tuval . bind_all ( '<Sol Tuş Basımı>' ,
+                             kendi . hareket_sag )  
+        kendi . tuval . bind_all ( '<Sağ Tuşa Basma>' ,
+                             kendi . hareket_sol )  
+        kendi . tuval . bind_all ( '<KeyPress-Up>' ,
+                             kendi . hareket_ust )  
+        kendi . tuval . bind_all ( '<KeyPress-Down>' ,
+                             kendi . hareket_alt )  
+
+    
+    def  Ciz ( kendi ):
+        kendi . tuval . hareket ( kendi . idUFO , kendi . x ,
+                         kendi .y )​
+        Koordinat  =  öz . tuval . koordinatlar ( self.idUFO )​​  
+        
+         Koordinat [ 0 ] <  10 ise :  
+            kendi . Kaybettin ()  
+         Koordinat [ 0 ] >  670 ise :  
+            kendi . Kaybettin ()  
+         Koordinat [ 1 ] <  10 ise :  
+            kendi . Kaybettin ()  
+         Koordinat [ 1 ] >  364 ise :  
+            kendi . Kaybettin ()  
+            
+        eğer  kendisi . İnekKacir ( Koordinat ) ==  Doğru :
+            kendi . skor  =  kendi . skor  +  1  
+            başlarX  =  float (
+                rastgele . randint ( 50 , 620 ))  
+            başlarY  =  float (
+                rastgele . randint ( 50 , 320 ))  
+            öz . tuval . koordinatlar ( self . Ineks . idInek , startX , startY )  
+            kendi .hiz =  kendi .hiz + 1​ ​    
+            self.canvas.itemconfig ( self.textSkor , text = " Skor : % s " % self.skoru )​​​  
+            self.canvas.itemconfig ( self.textHiz , text = " Hız   : % s " % self.hiz )​​​  
+
+    
+    def  hareket_sag ( self , event ):
+        kendi . x  =  - 1  - ( kendi . hiz  /  100 )
+        kendi .y = 0​  
+
+    def  hareket_sol ( self , event ):
+        kendi . x  =  1  + ( kendi . hiz  /  100 )
+        kendi .y = 0​  
+
+    def  hareket_ust ( self , event ):
+        kendi . x  =  0
+        kendi . y  =  - 1  - ( kendi . hiz  /  100 )
+
+    def  hareket_alt ( self , event ):
+        kendi . x  =  0
+        kendi . y  =  1  + ( kendi . hiz  /  100 )
+
+    
+    def  InekKacir ( kendi , poz ):
+        InekKoordinat  =  öz . tuval . koordinatlar ( self . Ineks . idInek )
+        eğer  pos [ 0 ] >=  InekKoordinat [ 0 ] ve  pos [ 0 ] <=  InekKoordinat [ 0 ] +  50 ise:
+            eğer  pos [ 1 ] >=  InekKoordinat [ 1 ] ve  pos [ 1 ] <=  InekKoordinat [ 1 ] +  50 ise :
+                 Doğruyu döndür
+
+         False'ı döndür
+
+    
+    def  Kaybettin ( kendi ):
+        kendi . x  =  0  
+        kendi .y = 0​  
+        kendi . tuval . koordinatlar ( kendi . idUFO , 700 , 700 )  
+        self . textid  =  self . canvas . create_text ( 350 , 150 , text = "Kaybettin" , font = ( "Arial" , 25 ),
+                                              doldur = "kırmızı" )  
+
+
+sınıf  Inek :
+    def  __init__ ( self , canvas , InekResim ):
+        kendi . tuval  =  tuval
+        kendi . idInek  =  tuval . create_image ( 10 , 10 , resim = InekResim )  
+        kendi . tuval . hareket ( kendi . idInek , 150 , 20 )
+
+    def  Ciz ( kendi ):
+        kendi . tuval . hareket ( kendi . idInek , 0 , 0 )
+
+
+tk  =  Tk ()
+teşekkürler . title ( 'İnek Kacırma Oyunu' )   # Oyun baslığımız
+tuval  =  Tuval ( tk , genişlik = 679 , yükseklik = 374 , bd = 0 ,
+                vurgulamakalınlığı = 0 )  
+
+UFO  =  FotoğrafGörüntü ( dosya = 'Ufo.png' )  
+INEK  =  FotoğrafGörüntü ( dosya = 'İnek.png' )  
+ArkaPlan  =  ImageTk . PhotoImage ( dosya = "MainBackground.png" )
+tuval . create_image ( 0 , 0 , image = ArkaPlan , çapa = NW )   # Ekranımızın arka planını belirliyoruz :)
+tuval . paket ()
+tk . güncelleme ()
+
+Inek  =  Inek ( canvas , INEK )   # Inek Nesnemize Gerekli Parametreleri Yolluyoruz. Veeee :)
+Ufo  =  Ufo ( Inek , UFO , canvas )   # Ufo Nesnemize Gerekli Parametreleri Yolluyoruz. VE OYUN HAZIR :)
+
+ 1 iken :
+    Inek . Ciz ()
+    Ufo . Ciz ()
+    tk . boşta_görevleri_güncelle ()
+    tk . güncelleme ()
+    zaman . uyku ( 0.005 )          
